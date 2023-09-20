@@ -23,7 +23,7 @@ def rekognition():
             MinConfidence=10,
         )
  
-        return ','.join([f'{label["Name"]} {label["Confidence"]:.2f}%,' for label in res['Labels']])
+        return ','.join([f'{boto3.client(service_name="translate", region_name="ap-northeast-1").translate_text(Text=label["Name"], SourceLanguageCode="en", TargetLanguageCode="ja").get("TranslatedText")} {label["Confidence"]:.2f}%,' for label in res['Labels']])
 
     except Exception as e:
         tb = sys.exc_info()[2]
